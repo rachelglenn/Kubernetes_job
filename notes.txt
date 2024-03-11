@@ -5,7 +5,8 @@ cd  ~/.local/bin/
 
 #pull from internet
 curl -LO https://dl.k8s.io/release/v1.26.7/bin/linux/amd64/kubect
-# add ~/.local/bin/ to PATH
+# add ~/.local/bin/ to ~/.bashrc
+export PATH="$PATH:/home/rglenn1/.local/bin"
 
 
 # build docker container, then re-tag and push to harbor:
@@ -17,7 +18,27 @@ docker image push hpcharbor.mdanderson.edu/rglenn/mist-tf
  kubectl apply -f python_test_job.yml
  
  
- #Setup OpenLens
- install openlens
+#Setup OpenLens
+ https://scoop.sh/
+#get powershell
+ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+ scoop bucket add extras
+ scoop install git
+ scoop install openlens
+ 
+# Windows start openlens
  Catalog->Cluster->Add new one from kubeconfig
  Copy and paste your cube config into the new window
+ Tag your new cluster to keep in the bar. 
+ 
+ 
+
+#Kube commands
+ 
+kubectl config view
+kubectl cluster-info
+kubectl version
+kubectl apply -f python_test_job.yml 
+kubectl get jobs
+
